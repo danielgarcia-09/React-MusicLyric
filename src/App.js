@@ -36,9 +36,12 @@ function App() {
         const url2 = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
 
         const [lyricResponse, artistResponse] = await Promise.all([
-          setLyrics(url),
-          setArtist(url2),
+          axios(url),
+          axios(url2),
         ]);
+
+        setLyrics(lyricResponse);
+        setArtist(artistResponse);
 
         stopLoading();
       } catch (err) { catchError() }
@@ -46,15 +49,13 @@ function App() {
     lyricAndArtistAPI();
   }, [searchLyric]);
 
-  const setLyrics = async (url) => {
-    const resp = await axios(url);
+  const setLyrics = async (resp) => {
     const { data } = resp;
     const lyrics = data.lyrics;
     saveLyrics(lyrics);
   };
 
-  const setArtist = async (url) => {
-    const resp = await axios(url);
+  const setArtist = async (resp) => {
     const { data } = resp;
     const artist = data.artists[0];
     saveArtist(artist);
