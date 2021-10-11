@@ -2,7 +2,6 @@ import { useState, Fragment, useEffect } from "react";
 import "./index.css";
 import Form from "./components/Form";
 import axios from "axios";
-import Error from "./components/Error";
 import Song from "./components/Song";
 import Spinner from "./components/Spinner";
 import Artist from "./components/Artist";
